@@ -1,0 +1,8 @@
+configuration:
+  reload-message: '<green>Плагин успешно перезапущен.'
+
+  enable-afk-message: '<gray>Вы вошли в режим афк.'
+  disable-afk-message: '<gray>Вы вышли из режима афк'
+
+  title: '<aqua>Вы отошли.'
+  subtitle: '<gray>Возвращайтесь! Мы вас ждем! :)'
