@@ -2,14 +2,15 @@ package ru.sema1ary.afk.placeholder;
 
 import lombok.RequiredArgsConstructor;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
+import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-import ru.sema1ary.afk.model.AfkUser;
-import ru.sema1ary.afk.service.AfkUserService;
+import ru.sema1ary.afk.service.AfkService;
 
 @RequiredArgsConstructor
 public class AfkPlaceholder extends PlaceholderExpansion {
-    private final AfkUserService userService;
+    private final AfkService afkService;
 
     @Override
     public @NotNull String getIdentifier() {
@@ -18,12 +19,12 @@ public class AfkPlaceholder extends PlaceholderExpansion {
 
     @Override
     public @NotNull String getAuthor() {
-        return "";
+        return "sema1ary";
     }
 
     @Override
     public @NotNull String getVersion() {
-        return "";
+        return "1.0.0";
     }
 
     @Override
@@ -39,9 +40,13 @@ public class AfkPlaceholder extends PlaceholderExpansion {
             return null;
         }
 
-        AfkUser user = userService.getUser(username);
+        Player onlinePlayer = Bukkit.getPlayer(player.getName());
 
-        if(user.isAfk()) {
+        if(onlinePlayer == null || !onlinePlayer.isOnline()) {
+            return null;
+        }
+
+        if(afkService.isPlayerInAfk(onlinePlayer)) {
             return "&c● ";
         }
 
