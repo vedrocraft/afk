@@ -22,30 +22,30 @@ public final class Afk extends JavaPlugin implements BaseCommons {
         ServiceManager.registerService(ConfigService.class, new ConfigServiceImpl(this));
 
         ServiceManager.registerService(AfkService.class, new AfkServiceImpl(
-                ServiceManager.getService(ConfigService.class)
+                getService(ConfigService.class)
         ));
 
         getServer().getPluginManager().registerEvents(new JoinListener(
-                ServiceManager.getService(AfkService.class)
+                getService(AfkService.class)
         ), this);
 
         getServer().getPluginManager().registerEvents(new QuitListener(
-                ServiceManager.getService(AfkService.class)
+                getService(AfkService.class)
         ), this);
 
         getServer().getPluginManager().registerEvents(new MoveListener(
-                ServiceManager.getService(AfkService.class)
+                getService(AfkService.class)
         ), this);
 
         LiteCommandBuilder.builder()
                 .commands(new AfkCommand(
-                        ServiceManager.getService(AfkService.class)
+                        getService(AfkService.class)
                 ))
                 .build();
 
         if(getServer().getPluginManager().isPluginEnabled("PlaceholderAPI")) {
             new AfkPlaceholder(
-                    ServiceManager.getService(AfkService.class)
+                    getService(AfkService.class)
             ).register();
         }
     }
