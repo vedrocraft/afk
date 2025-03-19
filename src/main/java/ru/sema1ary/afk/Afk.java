@@ -17,8 +17,6 @@ import ru.sema1ary.vedrocraftapi.service.impl.ConfigServiceImpl;
 public final class Afk extends JavaPlugin implements BaseCommons {
     @Override
     public void onEnable() {
-        saveDefaultConfig();
-
         ServiceManager.registerService(ConfigService.class, new ConfigServiceImpl(this));
 
         ServiceManager.registerService(AfkService.class, new AfkServiceImpl(
